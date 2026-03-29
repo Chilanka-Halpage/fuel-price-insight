@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS fuel_price_history (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    code TEXT NOT NULL,
+    formatted TEXT NOT NULL,
+    currency TEXT NOT NULL,
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    type TEXT,
+    unit TEXT,
+    source TEXT
+);

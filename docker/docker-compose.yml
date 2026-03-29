@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image:  postgres:18.3
+    container_name: postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD_FILE: /run/secrets/pg_password
+      POSTGRES_DB: fuel_price_insight
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    secrets:
+      - pg_password
+
+volumes:
+  postgres_data:
+
+secrets:
+  pg_password:
+    file: ../secrets/pg_admin_pass.txt

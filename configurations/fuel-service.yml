@@ -1,0 +1,55 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/fuel_price_insight
+    username: app_user
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+oilapi:
+  uri: https://api.oilpriceapi.com/
+  key: ${OIL_PRICE_API_KEY}
+
+logging:
+  file:
+    name: fuel-service/logs/fuel-price-service.log
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      fuelPrice:
+        # How many recent calls to evaluate
+        sliding-window-size: 10
+
+        # Open circuit if 50% of calls fail
+        failure-rate-threshold: 50
+
+        # Min calls before CB can open (avoids opening on first failure)
+        minimum-number-of-calls: 5
+
+        # Stay OPEN for 10 seconds, then go HALF-OPEN
+        wait-duration-in-open-state: 10s
+
+        # Allow 3 test calls in HALF-OPEN state
+        permitted-number-of-calls-in-half-open-state: 3
+
+        # Also count slow calls as failures
+        slow-call-duration-threshold: 3s
+        slow-call-rate-threshold: 50
+
+        # Which exceptions should count as failures
+#        record-exceptions:
+#          - org.springframework.web.client.RestClientException
+#          - java.io.IOException
+#          - java.util.concurrent.TimeoutException
+
+  retry:
+    instances:
+      fuelPrice:
+        max-attempts: 3
+        wait-duration: 500ms
+#        retry-exceptions:
+#          - org.springframework.web.client.RestClientException
+

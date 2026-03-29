@@ -1,0 +1,1 @@
+ALTER TABLE fuel_price_history ADD COLUMN price NUMERIC(10, 2);

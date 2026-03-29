@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: fuel-service
+  config:
+    import: optional:configserver:http://127.0.0.1:8888
+
+server:
+  port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,caches,circuitbreakers

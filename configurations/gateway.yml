@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: fuel-service
+              uri: lb://FUEL-SERVICE
+              predicates:
+                - Path=/api/fuel/**
+gateway:
+  logging:
+    request-cache-limit: 10240

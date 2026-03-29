@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:/Users/chilanka/Documents/MyProjects/fuel-price-insight/configurations
+server:
+  port: 8888
