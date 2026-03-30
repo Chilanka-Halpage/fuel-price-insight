@@ -22,7 +22,7 @@ import java.util.Optional;
 public class FuelPriceServiceImpl implements FuelPriceService {
     private static final String CACHE_NAME = "fuelPrice";
 
-    private final WebClient defaultWebClient;
+    private final WebClient OilApiServiceWebClient;
     private final CacheManager cacheManager;
     private final FuelPriceRepository fuelPriceRepository;
 
@@ -32,7 +32,7 @@ public class FuelPriceServiceImpl implements FuelPriceService {
     public FuelPriceResponse getPrice(String code) {
         try {
             log.info("Calling get fuel price for code: {}", code);
-            OilPriceApiResponse oilPriceApiResponse = defaultWebClient.get()
+            OilPriceApiResponse oilPriceApiResponse = OilApiServiceWebClient.get()
                     .uri(uriBuilder -> uriBuilder
                             .path("/v1/prices/latest")
                             .queryParam("by_code", code)

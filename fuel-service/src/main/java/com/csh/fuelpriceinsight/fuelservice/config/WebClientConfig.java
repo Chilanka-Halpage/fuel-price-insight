@@ -17,16 +17,16 @@ public class WebClientConfig {
         return WebClient.builder();
     }
 
-//    @Bean
-//    @LoadBalanced
-//    public WebClient.Builder loadBalancedWebClientBuilder() {
-//        return WebClient.builder();
-//    }
-//
-//    @Bean
-//    public WebClient playerServiceWebClient(WebClient.Builder loadBalancedWebClientBuilder, @Value("${cricket.stats.baseurl}") String baseUrl) {
-//        return loadBalancedWebClientBuilder.baseUrl(baseUrl).build();
-//    }
+    @Bean
+    @LoadBalanced
+    public WebClient.Builder loadBalancedWebClientBuilder() {
+        return WebClient.builder();
+    }
+
+    @Bean
+    public WebClient aiServiceWebClient(WebClient.Builder loadBalancedWebClientBuilder, @Value("${ai-service.baseurl}") String baseUrl) {
+        return loadBalancedWebClientBuilder.baseUrl(baseUrl).build();
+    }
 
     @Bean
     public WebClient OilApiServiceWebClient(WebClient.Builder defaultWebClientBuilder, @Value("${oilapi.uri}") String oilPriceApiUrl, @Value("${oilapi.key}") String oilPriceApiKey) {

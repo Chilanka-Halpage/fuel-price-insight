@@ -8,6 +8,10 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
+
+ai-service:
+  baseurl: http://AI-SERVICE
+
 oilapi:
   uri: https://api.oilpriceapi.com/
   key: ${OIL_PRICE_API_KEY}
@@ -18,8 +22,8 @@ logging:
 
 resilience4j:
   circuitbreaker:
-    instances:
-      fuelPrice:
+    configs:
+      default:
         # How many recent calls to evaluate
         sliding-window-size: 10
 
@@ -38,18 +42,28 @@ resilience4j:
         # Also count slow calls as failures
         slow-call-duration-threshold: 3s
         slow-call-rate-threshold: 50
-
         # Which exceptions should count as failures
 #        record-exceptions:
 #          - org.springframework.web.client.RestClientException
 #          - java.io.IOException
 #          - java.util.concurrent.TimeoutException
-
-  retry:
     instances:
       fuelPrice:
+        baseConfig: default
+      pricePrediction:
+        baseConfig: default
+
+  retry:
+    configs:
+      default:
         max-attempts: 3
         wait-duration: 500ms
 #        retry-exceptions:
 #          - org.springframework.web.client.RestClientException
+    instances:
+      fuelPrice:
+        baseConfig: default
+      pricePrediction:
+        baseConfig: default
+
 

@@ -13,7 +13,7 @@ public class InfinispanConfig {
     @Bean
     public InfinispanCacheConfigurer cacheConfigurer() {
         return manager -> {
-            org.infinispan.configuration.cache.Configuration config = new ConfigurationBuilder()
+            org.infinispan.configuration.cache.Configuration fuelPriceConfig = new ConfigurationBuilder()
                     .expiration()
                     .lifespan(1, TimeUnit.HOURS)
                     .maxIdle(30, TimeUnit.MINUTES)
@@ -21,7 +21,16 @@ public class InfinispanConfig {
                     .maxCount(1000)
                     .build();
 
-            manager.defineConfiguration("fuelPrice", config);
+            org.infinispan.configuration.cache.Configuration predictedPriceConfig = new ConfigurationBuilder()
+                    .expiration()
+                    .lifespan(1, TimeUnit.HOURS)
+                    .maxIdle(30, TimeUnit.MINUTES)
+                    .memory()
+                    .maxCount(1000)
+                    .build();
+
+            manager.defineConfiguration("fuelPrice", fuelPriceConfig);
+            manager.defineConfiguration("predictedPrice", predictedPriceConfig);
         };
     }
 }

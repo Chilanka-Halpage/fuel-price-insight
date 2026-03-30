@@ -2,12 +2,10 @@ package com.csh.fuelpriceinsight.fuelservice.controller;
 
 import com.csh.fuelpriceinsight.fuelservice.dto.FuelPriceResponse;
 import com.csh.fuelpriceinsight.fuelservice.service.FuelPriceService;
+import com.csh.fuelpriceinsight.fuelservice.service.PricePredictionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +15,7 @@ import java.util.List;
 public class FuelController {
 
     private final FuelPriceService fuelPriceService;
+    private final PricePredictionService pricePredictionService;
 
     @GetMapping("/price")
     public ResponseEntity<FuelPriceResponse> getPrice(@RequestParam("code") String code) {
@@ -28,5 +27,11 @@ public class FuelController {
     public ResponseEntity<List<FuelPriceResponse>> getPriceHistory(@RequestParam("code") String code) {
         List<FuelPriceResponse> priceHistory = fuelPriceService.getFuelPriceHistoryByCode(code);
         return ResponseEntity.ok(priceHistory);
+    }
+
+    @GetMapping("/price-prediction/{code}/{frequency}")
+    public ResponseEntity<String> getPricePrediction(@PathVariable() String code, @PathVariable String frequency) {
+        String predictedPrice = pricePredictionService.getPredictedPrice(code, frequency);
+        return ResponseEntity.ok(predictedPrice);
     }
 }
