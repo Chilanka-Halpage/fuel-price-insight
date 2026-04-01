@@ -1,0 +1,22 @@
+spring:
+  rabbitmq:
+    username: csh_rabbit
+    password: ${PASSWORD}
+
+server:
+  port: 8083
+
+rabbitmq:
+  queue:
+    name: price.comments.queue
+  exchange:
+    name: price-comments.exchange
+  routing:
+    key: price.comments.created
+
+comment-manager-service:
+  baseurl: http://COMMENTS-MANAGER-SERVICE
+
+logging:
+  file:
+    name: price-comment-service/price-comment-service.log

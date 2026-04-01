@@ -8,6 +8,10 @@ spring:
               uri: lb://FUEL-SERVICE
               predicates:
                 - Path=/api/fuel/**
+            - id: price-comments-service
+              uri: lb://PRICE-COMMENT-SERVICE
+              predicates:
+                  - Path=api/price-comments/**
 gateway:
   logging:
     request-cache-limit: 10240

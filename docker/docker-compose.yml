@@ -14,8 +14,24 @@ services:
     secrets:
       - pg_password
 
+  rabbitmq:
+    image: rabbitmq:4.2.2-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: csh_rabbit
+      RABBITMQ_DEFAULT_PASS: password
+    ports:
+      - "5672:5672"    # AMQP
+      - "15672:15672"  # Management UI
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
 volumes:
   postgres_data:
+  rabbitmq-data:
+    driver: local
 
 secrets:
   pg_password:
