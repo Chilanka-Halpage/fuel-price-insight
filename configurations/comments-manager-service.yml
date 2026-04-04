@@ -15,3 +15,8 @@ server:
 logging:
   file:
     name: comments-manager-service/comments-manager-service.log
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0

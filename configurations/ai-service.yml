@@ -4,4 +4,9 @@ gemini:
 
 logging:
   file:
-    name: ai-service/logs/ai-service.log
+    name: ai-service/logs/ai-service.
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0

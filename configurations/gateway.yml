@@ -15,3 +15,8 @@ spring:
 gateway:
   logging:
     request-cache-limit: 10240
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0

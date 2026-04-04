@@ -20,3 +20,8 @@ comment-manager-service:
 logging:
   file:
     name: price-comment-service/price-comment-service.log
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0

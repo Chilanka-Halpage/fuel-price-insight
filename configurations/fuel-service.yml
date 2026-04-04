@@ -66,4 +66,9 @@ resilience4j:
       pricePrediction:
         baseConfig: default
 
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
 
