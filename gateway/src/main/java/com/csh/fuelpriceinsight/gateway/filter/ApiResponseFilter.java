@@ -59,9 +59,6 @@ public class ApiResponseFilter implements Filter {
         response.setCharacterEncoding("UTF-8");
         response.setContentLength(wrappedBytes.length);
         response.getOutputStream().write(wrappedBytes);
-
-        // Important: must call this to complete the response copy
-        // Do NOT call responseWrapper.copyBodyToResponse() — we wrote manually
     }
 
     private String buildSuccess(String body, int statusCode, String path) {

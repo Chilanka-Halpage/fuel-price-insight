@@ -12,9 +12,6 @@ spring:
               uri: lb://PRICE-COMMENT-SERVICE
               predicates:
                   - Path=api/price-comments/**
-gateway:
-  logging:
-    request-cache-limit: 10240
 
 management:
   tracing:

@@ -1,12 +1,11 @@
 spring:
   application:
     name: config-server
-  profiles:
-    active: native
   cloud:
     config:
       server:
-        native:
-          search-locations: file:/Users/chilanka/Documents/MyProjects/fuel-price-insight/configurations
+        git:
+          uri: https://github.com/Chilanka-Halpage/fuel-price-insight
+          search-paths: configurations
 server:
   port: 8888

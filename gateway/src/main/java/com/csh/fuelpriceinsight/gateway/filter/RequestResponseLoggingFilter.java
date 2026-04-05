@@ -5,26 +5,25 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 
 @Component
 @Order(FiltersOrder.LOGGING)
 public class RequestResponseLoggingFilter extends OncePerRequestFilter {
 
     private static final Logger requestLogger = LoggerFactory.getLogger("RequestResponseLogger");
-
-    @Value("${gateway.logging.request-cache-limit}")
-    private int requestCacheLimit;
 
     private static final Set<String> SENSITIVE_HEADERS = Set.of(
             "authorization", "cookie", "set-cookie",
@@ -38,11 +37,10 @@ public class RequestResponseLoggingFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain)
+                                    @NonNull HttpServletResponse response,
+                                    @NonNull FilterChain filterChain)
             throws ServletException, IOException {
 
-        ContentCachingRequestWrapper wrappedRequest = new ContentCachingRequestWrapper(request, requestCacheLimit);
         ContentCachingResponseWrapper wrappedResponse = new ContentCachingResponseWrapper(response);
 
         String correlationId = Optional
@@ -54,15 +52,15 @@ public class RequestResponseLoggingFilter extends OncePerRequestFilter {
         long startTime = System.currentTimeMillis();
 
         try {
-            filterChain.doFilter(wrappedRequest, wrappedResponse);
+            filterChain.doFilter(request, wrappedResponse);
 
             long duration = System.currentTimeMillis() - startTime;
             int status = wrappedResponse.getStatus();
-            logEntry(wrappedRequest, correlationId, status, duration, null);
+            logEntry(request, correlationId, status, duration, null);
 
         } catch (Exception ex) {
             long duration = System.currentTimeMillis() - startTime;
-            logEntry(wrappedRequest, correlationId, 500, duration, ex.getMessage());
+            logEntry(request, correlationId, 500, duration, ex.getMessage());
             throw ex;
 
         } finally {
