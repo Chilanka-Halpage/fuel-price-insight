@@ -18,9 +18,9 @@ public class PriceCommentController {
     private final PriceCommentService priceCommentService;
 
     @PostMapping
-    public ResponseEntity<String> addComment(@RequestBody PriceComment comment) {
-        comment.setUserId(1);
-        comment.setUserName("user1");
+    public ResponseEntity<String> addComment(@RequestHeader(value = "X-User-Id") String userId, @RequestHeader(value = "X-Username") String username, @RequestBody PriceComment comment) {
+        comment.setUserId(userId);
+        comment.setUserName(username);
         comment.setLastUpdatedAt(new Date().toInstant());
         priceCommentService.addComment(comment);
         return ResponseEntity.status(HttpStatus.CREATED).body("\"Comment Added Successfully\"");

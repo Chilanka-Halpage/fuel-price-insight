@@ -12,6 +12,11 @@ spring:
               uri: lb://PRICE-COMMENT-SERVICE
               predicates:
                   - Path=api/price-comments/**
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:9090/realms/csh-apps/protocol/openid-connect/certs
 
 management:
   tracing:

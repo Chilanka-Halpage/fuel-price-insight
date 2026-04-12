@@ -44,6 +44,23 @@ services:
     # Uncomment to enable debug logging
     # command: --logging.level.zipkin2=DEBUG
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.4.7
+    container_name: keycloak
+    command: start-dev
+    environment:
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_USERNAME: admin
+      KC_DB_PASSWORD: ${DB_PASS}
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KC_PASS}
+    ports:
+      - "9090:8080"
+    depends_on:
+      - postgres
+
 volumes:
   postgres_data:
   rabbitmq-data:
@@ -52,3 +69,4 @@ volumes:
 secrets:
   pg_password:
     file: ../secrets/pg_admin_pass.txt
+
