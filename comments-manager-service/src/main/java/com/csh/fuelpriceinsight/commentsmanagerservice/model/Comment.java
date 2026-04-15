@@ -13,6 +13,6 @@ public class Comment {
     private String id;
     private String description;
     private String userName;
-    private int userId;
-    private Instant createdAt;
+    private String userId;
+    private Instant lastUpdatedAt;
 }

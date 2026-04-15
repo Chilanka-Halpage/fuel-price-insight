@@ -21,6 +21,6 @@ public class CommentManagerServiceImpl implements CommentManagerService {
 
     @Override
     public List<Comment> getPriceComments() {
-        return commentRepository.findAll();
+        return commentRepository.findAllByOrderByLastUpdatedAtDesc();
     }
 }

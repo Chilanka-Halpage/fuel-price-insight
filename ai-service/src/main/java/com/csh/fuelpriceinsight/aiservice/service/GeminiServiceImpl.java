@@ -37,12 +37,12 @@ public class GeminiServiceImpl implements GeminiService {
 
     private GeminiRequest getRequestBody(String type, double currentPrice, String frequencyType) {
         String prompt = String.format("""
-                Give the price for %s, whose current price is %s, %s in following json format. Give the reasons and possible price volatility throughout the above specified period.
+                Give the price for %s, whose current price is %s, %s in following json format. Give SHORT description specifying the reasons and possible price volatility throughout the above specified period.
                 {
-                    predictedPrice:
-                    description:
+                    "predictedPrice": "",
+                    "description": ""
                 }
-                Please give the response using EXACT above format and dont include ```json``` in response
+                Please give the SHORT response using EXACT above format and dont include ```json``` and ** in response
                 }""", FuelType.valueOf(type).getDescription(), currentPrice, FrequencyType.valueOf(frequencyType).getDescription());
 
         return new GeminiRequest(
