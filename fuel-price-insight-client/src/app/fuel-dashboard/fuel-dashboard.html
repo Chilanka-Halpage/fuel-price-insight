@@ -1,0 +1,137 @@
+<div class="dashboard">
+    <mat-toolbar color="primary" class="toolbar">
+
+        <span class="title">Fuel Price Insight Dashboard</span>
+
+        <span class="spacer"></span>
+
+        <span class="title">{{username()}}</span>
+
+        <button mat-button class="logout-btn" (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            Logout
+        </button>
+
+    </mat-toolbar>
+
+    <div class="container">
+
+        <div class="left">
+
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Select Fuel Type</mat-label>
+                <mat-select [formControl]="selectedFuel">
+                    @for (fuelType of fuelTypes(); track fuelType.code) {
+                    <mat-option [value]="fuelType.code">
+                        {{fuelType.decription}}
+                    </mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <mat-card class="price-card">
+                <h2>Current Price</h2>
+                <h1> {{currentFromatedPrice()}}</h1>
+            </mat-card>
+
+            <mat-card class="prediction-card">
+                <h3>AI Price Prediction</h3>
+
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Prediction Period</mat-label>
+                    <mat-select [formControl]="selectedPredictionType">
+                        @for (predictionType of predictionTypes(); track predictionType.code) {
+                        <mat-option [value]="predictionType.code">
+                            {{predictionType.decription}}
+                        </mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                @if (predictedPrice()) {
+                <div class="prediction-result">
+
+                    <div class="prediction-price">
+                        USD {{predictedPrice().predictedPrice}}
+                    </div>
+
+                    <div class="prediction-desc">
+                        {{ predictedPrice().description }}.
+                        Price of <b>{{ getFuelName() }}</b> is expected to
+                        <span class="highlight">
+                            {{ predictedPrice().predictedPrice > currentPrice() ? 'increase' : 'decrease' }}
+                        </span>
+                        compared to the current price of USD {{currentPrice()}}.
+                    </div>
+
+                </div>
+                }
+            </mat-card>
+
+
+        </div>
+
+        <div class="right">
+
+            <div class="right-container">
+                <mat-card class="table-card">
+                    <h3>Price History</h3>
+
+                    <table mat-table [dataSource]="priceHistory()" class="mat-elevation-z2 full-width">
+
+                        <ng-container matColumnDef="datetime">
+                            <th mat-header-cell *matHeaderCellDef>Date Time</th>
+                            <td mat-cell *matCellDef="let element">{{element.createdAt | date: 'medium'}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="currency">
+                            <th mat-header-cell *matHeaderCellDef>Currency</th>
+                            <td mat-cell *matCellDef="let element">{{element.currency}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="price">
+                            <th mat-header-cell *matHeaderCellDef>Price</th>
+                            <td mat-cell *matCellDef="let element">{{element.price}}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="type">
+                            <th mat-header-cell *matHeaderCellDef>Type</th>
+                            <td mat-cell *matCellDef="let element">{{element.type}}</td>`
+                        </ng-container>
+
+                        <ng-container matColumnDef="unit">
+                            <th mat-header-cell *matHeaderCellDef>Unit</th>
+                            <td mat-cell *matCellDef="let element">{{element.unit}}</td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </mat-card>
+
+                <mat-card class="comments-card">
+                    <h3>User Comments</h3>
+
+                    <div class="comment-box">
+                        <textarea [(ngModel)]="newComment" placeholder="Add your comment..."></textarea>
+                        <button mat-raised-button color="primary" (click)="addComment()">
+                            Post
+                        </button>
+                    </div>
+
+                    <div class="comments">
+                        @for (comment of comments(); track $index) {
+                        <div class="comment">
+                            <strong>{{comment.userName}}</strong>
+                            <p>{{comment.description}}</p>
+                            <span>{{comment.lastUpdatedAt | date:'short'}}</span>
+                        </div>
+                        }
+                    </div>
+
+                </mat-card>
+
+            </div>
+
+        </div>
+    </div>
+</div>

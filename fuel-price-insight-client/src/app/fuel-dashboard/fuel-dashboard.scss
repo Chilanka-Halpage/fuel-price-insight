@@ -1,0 +1,284 @@
+.dashboard {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background: #f5f7fa;
+  flex: 1;
+}
+
+.left {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+}
+
+.right {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.price-card {
+  text-align: center;
+  background: linear-gradient(135deg, #3f51b5, #5c6bc0);
+  color: white;
+}
+
+.price-card h1 {
+  font-size: 40px;
+  margin: 20px 0;
+}
+
+.prediction {
+  margin-top: 15px;
+  font-size: 18px;
+  color: green;
+}
+
+.comment-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.comments {
+  margin-top: 20px;
+}
+
+.comment {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.comment p {
+  margin: 5px 0;
+}
+
+.right {
+  width: 70%;
+}
+
+.right-container {
+  display: flex;
+  gap: 20px;
+  height: 100%;
+}
+
+/* TABLE */
+.table-card {
+  width: 60%;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  font-weight: 600;
+}
+
+/* COMMENTS */
+.comments-card {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.comments {
+  margin-top: 15px;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.comment {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.comment p {
+  margin: 5px 0;
+}
+
+.prediction-card {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* RESULT BOX */
+.prediction-result {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #e3f2fd, #e8eaf6);
+  border-left: 5px solid #3f51b5;
+}
+
+/* BIG PRICE */
+.prediction-price {
+  font-size: 28px;
+  font-weight: bold;
+  color: #1a237e;
+  margin-bottom: 10px;
+}
+
+/* DESCRIPTION */
+.prediction-desc {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* HIGHLIGHT WORD */
+.highlight {
+  font-weight: bold;
+  color: #d32f2f;
+}
+
+.price-card {
+  text-align: center;
+  border-radius: 16px;
+  padding: 22px;
+
+  /* ✅ improved gradient (more depth) */
+  background: linear-gradient(135deg, #e0f7fa 0%, #f1fbff 50%, #ffffff 100%);
+
+  /* ✅ smoother accent (less harsh than border-left) */
+  border-left: 6px solid #ffa000;
+
+  /* ✅ better shadow with slight cyan tint */
+  box-shadow: 0 8px 24px rgba(0, 150, 136, 0.12);
+
+  color: #01579b;
+  transition: all 0.3s ease;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle cyan glow layer (very premium feel) */
+.price-card::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -30%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(0,188,212,0.15), transparent 70%);
+  pointer-events: none;
+}
+
+/* label */
+.price-card h2 {
+  font-weight: 500;
+  color: #607d8b;
+  margin-bottom: 8px;
+}
+
+/* ⭐ HERO PRICE */
+.price-card h1 {
+  font-size: 48px;
+  font-weight: 800;
+  color: #0277bd;
+
+  margin: 10px 0;
+
+  /* glow effect for emphasis */
+  text-shadow: 0 3px 12px rgba(2, 136, 209, 0.25);
+  letter-spacing: 1px;
+}
+
+/* hover */
+.price-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 150, 136, 0.18);
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #006064;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* logout button styling */
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+/* optional hover */
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+mat-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #006064; /* deep cyan */
+
+  margin-bottom: 12px;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+/* underline accent */
+mat-card h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 40px;
+  height: 3px;
+  border-radius: 2px;
+
+  background: #ffb300; /* amber accent */
+}
+

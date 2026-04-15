@@ -1,0 +1,67 @@
+/* full page */
+.landing-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* toolbar */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* app title */
+.app-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  color: #006064;
+}
+
+/* hero section */
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+}
+
+/* content box */
+.hero-content {
+  text-align: center;
+  max-width: 500px;
+}
+
+/* main heading */
+.main-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #006064;
+  margin-bottom: 16px;
+}
+
+/* subtitle */
+.subtitle {
+  font-size: 16px;
+  color: #546e7a;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* buttons */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* button polish */
+button {
+  min-width: 120px;
+  font-weight: 600;
+  border-radius: 8px;
+}
