@@ -20,59 +20,14 @@
   height: 100%;
 }
 
-.right {
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
 .full-width {
   width: 100%;
-}
-
-.price-card {
-  text-align: center;
-  background: linear-gradient(135deg, #3f51b5, #5c6bc0);
-  color: white;
-}
-
-.price-card h1 {
-  font-size: 40px;
-  margin: 20px 0;
 }
 
 .prediction {
   margin-top: 15px;
   font-size: 18px;
   color: green;
-}
-
-.comment-box {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-textarea {
-  width: 100%;
-  min-height: 80px;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.comments {
-  margin-top: 20px;
-}
-
-.comment {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-
-.comment p {
-  margin: 5px 0;
 }
 
 .right {
@@ -85,7 +40,6 @@ textarea {
   height: 100%;
 }
 
-/* TABLE */
 .table-card {
   width: 60%;
   overflow: auto;
@@ -99,7 +53,6 @@ th {
   font-weight: 600;
 }
 
-/* COMMENTS */
 .comments-card {
   width: 40%;
   display: flex;
@@ -113,7 +66,7 @@ th {
 }
 
 textarea {
-  width: 100%;
+  width: 94%;
   min-height: 80px;
   padding: 10px;
   border-radius: 8px;
@@ -123,7 +76,7 @@ textarea {
 .comments {
   margin-top: 15px;
   overflow-y: auto;
-  max-height: 400px;
+  max-height: 550px;
 }
 
 .comment {
@@ -142,7 +95,6 @@ textarea {
   flex-direction: column;
 }
 
-/* RESULT BOX */
 .prediction-result {
   margin-top: 20px;
   padding: 15px;
@@ -151,7 +103,6 @@ textarea {
   border-left: 5px solid #3f51b5;
 }
 
-/* BIG PRICE */
 .prediction-price {
   font-size: 28px;
   font-weight: bold;
@@ -159,14 +110,12 @@ textarea {
   margin-bottom: 10px;
 }
 
-/* DESCRIPTION */
 .prediction-desc {
   font-size: 14px;
   color: #333;
   line-height: 1.6;
 }
 
-/* HIGHLIGHT WORD */
 .highlight {
   font-weight: bold;
   color: #d32f2f;
@@ -177,13 +126,10 @@ textarea {
   border-radius: 16px;
   padding: 22px;
 
-  /* ✅ improved gradient (more depth) */
   background: linear-gradient(135deg, #e0f7fa 0%, #f1fbff 50%, #ffffff 100%);
 
-  /* ✅ smoother accent (less harsh than border-left) */
   border-left: 6px solid #ffa000;
 
-  /* ✅ better shadow with slight cyan tint */
   box-shadow: 0 8px 24px rgba(0, 150, 136, 0.12);
 
   color: #01579b;
@@ -193,7 +139,6 @@ textarea {
   overflow: hidden;
 }
 
-/* subtle cyan glow layer (very premium feel) */
 .price-card::before {
   content: '';
   position: absolute;
@@ -205,14 +150,13 @@ textarea {
   pointer-events: none;
 }
 
-/* label */
+
 .price-card h2 {
   font-weight: 500;
   color: #607d8b;
   margin-bottom: 8px;
 }
 
-/* ⭐ HERO PRICE */
 .price-card h1 {
   font-size: 48px;
   font-weight: 800;
@@ -220,12 +164,10 @@ textarea {
 
   margin: 10px 0;
 
-  /* glow effect for emphasis */
   text-shadow: 0 3px 12px rgba(2, 136, 209, 0.25);
   letter-spacing: 1px;
 }
 
-/* hover */
 .price-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 30px rgba(0, 150, 136, 0.18);
@@ -245,7 +187,6 @@ textarea {
   flex: 1 1 auto;
 }
 
-/* logout button styling */
 .logout-btn {
   display: flex;
   align-items: center;
@@ -253,7 +194,6 @@ textarea {
   font-weight: 500;
 }
 
-/* optional hover */
 .logout-btn:hover {
   background: rgba(255, 255, 255, 0.15);
 }
@@ -261,14 +201,13 @@ textarea {
 mat-card h3 {
   font-size: 16px;
   font-weight: 600;
-  color: #006064; /* deep cyan */
+  color: #006064; 
 
   margin-bottom: 12px;
   position: relative;
   padding-bottom: 6px;
 }
 
-/* underline accent */
 mat-card h3::after {
   content: '';
   position: absolute;
@@ -279,6 +218,6 @@ mat-card h3::after {
   height: 3px;
   border-radius: 2px;
 
-  background: #ffb300; /* amber accent */
+  background: #ffb300;
 }
 

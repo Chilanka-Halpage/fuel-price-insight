@@ -121,7 +121,7 @@
                     <div class="comments">
                         @for (comment of comments(); track $index) {
                         <div class="comment">
-                            <strong>{{comment.userName}}</strong>
+                            <strong>{{comment.userName?.toUpperCase()}}</strong>
                             <p>{{comment.description}}</p>
                             <span>{{comment.lastUpdatedAt | date:'short'}}</span>
                         </div>

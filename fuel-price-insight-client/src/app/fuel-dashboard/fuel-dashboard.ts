@@ -100,44 +100,113 @@ export class FuelDashboard {
   }
 
   getPrice(fuelType: any) {
-    this.fuelPriceService.getPrice(fuelType).subscribe(result => {
-      try {
-        this.currentFromatedPrice.set(result.data.formatted);
-        this.currentPrice.set(result.data.price);
-      } catch (error) {
-        console.error('Error retrieving price data:', error);
-      }
-    });
+    try {
+      this.fuelPriceService.getPrice(fuelType).subscribe({
+        next: result => {
+          if (result.success) {
+            this.currentFromatedPrice.set(result.data.formatted);
+            this.currentPrice.set(result.data.price);
+          } else {
+            console.error('Failed to retrieve price data:', result.error);
+            this.notification.error(`Oops! We couldn't fetch the current price right now`);
+            this.setDefaultPrice();
+          }
+
+        }, error: (error) => {
+          console.error('Error retrieving price data:', error);
+          this.notification.error(`Oops! We couldn't fetch the current price right now`);
+          this.setDefaultPrice();
+        }
+      });
+    } catch (error) {
+      console.error('Error retrieving price data:', error);
+      this.notification.error(`Oops! We couldn't fetch the current price right now`);
+      this.setDefaultPrice();
+    }
+  }
+
+  private setDefaultPrice() {
+    this.currentFromatedPrice.set('0.00');
+    this.currentPrice.set(0.00);
   }
 
   getPriceHistory(fuelType: any) {
-    this.fuelPriceService.getPriceHistory(fuelType).subscribe(result => {
-      try {
-        this.priceHistory.set(result.data);
-      } catch (error) {
-        console.error('Error retrieving price history data:', error);
-      }
-    });
+    try {
+      this.fuelPriceService.getPriceHistory(fuelType).subscribe({
+        next: result => {
+          if (result.success) {
+            this.priceHistory.set(result.data);
+          } else {
+            console.error('Failed to retrieve price history data:', result.error);
+            this.notification.error(`Oops! We couldn't fetch the price history right now`);
+            this.setDefaultPriceHistory();
+          }
+        },
+        error: (error) => {
+          console.error('Error retrieving price history data:', error);
+          this.notification.error(`Oops! We couldn't fetch the price history right now`);
+          this.setDefaultPriceHistory();
+        }
+      });
+    } catch (error) {
+      console.error('Error retrieving price history data:', error);
+      this.notification.error(`Oops! We couldn't fetch the price history right now`);
+      this.setDefaultPriceHistory();
+    }
+  }
+
+  private setDefaultPriceHistory() {
+    this.priceHistory.set([]);
   }
 
   getPrediction(fuelType: any, predictionType: any) {
-    this.fuelPriceService.getPrediction(fuelType, predictionType).subscribe(result => {
-      try {
-        this.predictedPrice.set(result.data);
-      } catch (error) {
-        console.error('Error retrieving price prediction data:', error);
-      }
-    })
+    try {
+      this.fuelPriceService.getPrediction(fuelType, predictionType).subscribe({
+        next: result => {
+          if (result.success) {
+            this.predictedPrice.set(result.data);
+          } else {
+            console.error('Failed to retrieve price prediction data:', result.error);
+            this.notification.error(`Oops! We couldn't fetch the price prediction right now`);
+            this.setDefaultPrediction();
+          }
+
+        }, error: (error) => {
+          console.error('Error retrieving price prediction data:', error);
+          this.notification.error(`Oops! We couldn't fetch the price prediction right now`);
+          this.setDefaultPrediction();
+        }
+      })
+    } catch (error) {
+      console.error('Error retrieving price prediction data:', error);
+      this.notification.error(`Oops! We couldn't fetch the price prediction right now`);
+      this.setDefaultPrediction();
+    }
+  }
+
+  private setDefaultPrediction() {
+    this.predictedPrice.set(null);
   }
 
   loadComments() {
-    this.fuelPriceService.getAllComments().subscribe(result => {
-      try {
-        this.comments.set(result.data);
-      } catch (error) {
-        console.error('Error loading comments:', error);
-      }
-    })
+    try {
+      this.fuelPriceService.getAllComments().subscribe({
+        next: result => {
+          if (result.success) {
+            this.comments.set(result.data);
+          } else {
+            console.error('Failed to load comments:', result.error);
+            this.notification.error(`Oops! We couldn't fetch the comments right now`);
+          }
+        }, error: (error) => {
+          console.error('Error loading comments:', error);
+          this.notification.error(`Oops! We couldn't fetch the comments right now`);
+        }
+      });
+    } catch (error) {
+      console.error('Error loading comments:', error);
+      this.notification.error(`Oops! We couldn't fetch the comments right now`);
+    }
   }
 
   addComment() {
